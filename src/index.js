@@ -1,3 +1,4 @@
+import { app } from "./app.js";
 import connectDB from "./db/index.js";
 import dotenv from "dotenv"; // professional way of loading environment variables to maintain the consistency of code
 dotenv.config({ path: "./.env" }); //one way to load environment variable using dotenv
@@ -6,7 +7,15 @@ dotenv.config({ path: "./.env" }); //one way to load environment variable using 
 });*/
 // we would add experimental commands in package.json in scripts to make it work
 
-connectDB();
+connectDB()
+  .then(() => {
+    app.listen(process.env.PORT || 8000, () => {
+      console.log(`App is listening at ${process.env.PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.log("MongoDb connection failed!!! ", err);
+  });
 /*
 import express from "express";
 const app = express();
