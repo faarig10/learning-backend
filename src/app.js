@@ -16,4 +16,13 @@ app.use(express.json({ limit: "16kb" })); // this is to accept json files
 app.use(express.urlencoded()); // this is encode the request that comes in the form of url so that our backend can respond accordingly
 app.use(express.static("public")); // this is to public assets that can be accessed by anyone
 app.use(cookieParser());
+
+//routes import
+
+import router from "./routes/user.routes.js";
+
+//routes declaration
+
+app.use("/api/v1/users", router);
+
 export { app };
